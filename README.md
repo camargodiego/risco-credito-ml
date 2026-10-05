@@ -1,12 +1,12 @@
 # 💳 Modelo de Machine Learning para Avaliação e Previsão de Risco de Crédito
 
-Este repositório contém uma solução completa de Machine Learning voltada para o setor financeiro, focada em prever o risco de inadimplência de clientes (Credit Scoring) com base em dados históricos de birôs e pedidos anteriores.
+Este repositório contém uma solução completa de Machine Learning voltada para o setor financeiro, focada em prever o risco de inadimplência de clientes (*Credit Scoring*) com base em dados históricos de birôs e pedidos anteriores.
 
 ---
 
 ## 🚀 Tecnologias e Ferramentas Utilizadas
 * **Python** (Linguagem principal)
-* **DuckDB** (Consultas OLAP rápidas e eficientes em memória)
+* **DuckDB & SQL** (Consultas OLAP de alta performance, agregações relacionais e tratamento de views diretamente em arquivos Parquet)
 * **OptBinning** (Tratamento de variáveis, *Weight of Evidence - WoE* e cálculo de *Information Value - IV*)
 * **LightGBM** (Modelo de *Gradient Boosting* de alta performance)
 * **Scikit-Learn & Pandas** (Processamento de dados e validação cruzada)
@@ -17,8 +17,8 @@ Este repositório contém uma solução completa de Machine Learning voltada par
 ## 📊 Arquitetura e Fluxo do Projeto
 
 1. **`notebooks/01_eda.ipynb`**: Análise exploratória inicial, agregação de dados relacionais via DuckDB e mapeamento de perfis de contratos.
-2. **`notebooks/02_visao_cliente_pipeline.ipynb`**: Engenharia de atributos, tratamento de anomalias (ex: `DAYS_EMPLOYED`), binnagem otimizada e filtragem de variáveis preditivas por *Information Value* (IV).
-3. **`notebooks/03_model_training.ipynb`**: Validação cruzada estratificada em 5 *folds*, treinamento do LightGBM, exportação do artefato do modelo e geração de gráficos de desempenho (Curva ROC e KS).
+2. **`notebooks/02_visao_cliente_pipeline.ipynb`**: Engenharia de atributos, tratamento de anomalias (ex: `DAYS_EMPLOYED`), binnagem otimizada e filtragem de variáveis preditivas por *Information Value* (IV) utilizando consultas SQL integradas.
+3. **`notebooks/03_model_training.ipynb`**: Validação cruzada estratificada em 5 *folds*, treinamento do LightGBM, exportação do artefato do modelo e geração de gráficos de desempenho.
 4. **`src/predict.py`**: Script modular de inferência automatizada para pontuar novos lotes de clientes.
 
 ---
@@ -30,6 +30,12 @@ O modelo foi validado rigorosamente através de validação cruzada (*5-Fold Str
 * **ROC-AUC:** 0.7483
 * **Gini:** 0.4965
 * **KS (Kolmogorov-Smirnov):** 37.25%
+
+### Curva ROC (OOF)
+![Curva ROC](./models/assets/curva_roc.png)
+
+### Curva KS (Kolmogorov-Smirnov)
+![Curva KS](./models/assets/curva_ks.png)
 
 ---
 
