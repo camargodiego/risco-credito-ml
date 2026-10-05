@@ -2,5 +2,8 @@ pandas
 duckdb
 pyarrow
 kagglehub
-ipykerneloptbinning
+ipykernel
+optbinning
+lightgbm
+joblib
 plotly
